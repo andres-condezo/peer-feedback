@@ -26,9 +26,7 @@ const main = () => {
   $newTaskInput.addEventListener('keypress', (event) => {
     if (event.key === 'Enter') { app.addTask($newTaskInput); }
   });
-  $removeCompletedBtn.addEventListener('click', () => {
-    app.deleteCompletedTasks();
-  });
+  $removeCompletedBtn.addEventListener('click', () => { app.deleteCompletedTasks(); });
   app.ChangeClearBtnState();
 };
 
