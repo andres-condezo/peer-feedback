@@ -1,16 +1,47 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const rules = [
+  {
+    test: /\.css$/i,
+    use: ['style-loader', 'css-loader'],
+  },
+  {
+    test: /\.m?js$/,
+    exclude: /node_modules/,
+    use: {
+      loader: 'babel-loader',
+      options: {
+        presets: [
+          '@babel/preset-react',
+          {
+            runtime: 'automatic',
+          },
+        ],
+      },
+    },
+  },
+  {
+    test: /\.(png|scg|jpg|jpeg|gif)$/i,
+    type: 'asset/resource',
+  },
+  {
+    test: /\.(woff|woff2|eot|ttf|otf)$/i,
+    type: 'asset/resource',
+    generator: {
+      filename: 'assets/fonts/[hash][ext]',
+    },
+  },
+];
+
 module.exports = {
   entry: './src/index.js',
-  mode: 'production',
   devServer: {
     static: './dist',
     hot: true,
     open: true,
     watchFiles: ['src/**/*'],
   },
-  devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/template.html',
@@ -31,30 +62,5 @@ module.exports = {
       '@images': path.resolve(__dirname, 'src/img/'),
     },
   },
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.m?js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
-      },
-      {
-        test: /\.(png|scg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: 'asset/resource',
-        generator: {
-          filename: 'assets/fonts/[hash][ext]',
-        },
-      },
-    ],
-  },
+  module: { rules },
 };

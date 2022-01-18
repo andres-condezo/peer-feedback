@@ -97,7 +97,6 @@ class ToDoApp {
     $checkBox.addEventListener('change', () => {
       if ($checkBox.checked) this.clearBtnState += 1;
       else this.clearBtnState -= 1;
-      console.log(this.clearBtnState);
       $check.classList.toggle('hidden');
       $box.classList.toggle('hidden');
       $textTask.classList.toggle('underlined');
@@ -111,7 +110,6 @@ class ToDoApp {
   deleteCompletedTasks = () => {
     this.clearBtnState = 0;
     this.ChangeClearBtnState();
-    console.log(this.clearBtnState);
     this.taskArr = this.taskArr.filter((el) => el.completed === false);
     this.saveLocalStorage();
     this.getLocalStorage();
