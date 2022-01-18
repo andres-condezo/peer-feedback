@@ -38,6 +38,13 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
+      {
         test: /\.(png|scg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
       },
